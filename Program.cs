@@ -40,11 +40,6 @@ namespace DatabasePerformanceTest
             // Close Connection
             msDbCtx.Dispose();
 
-            //TimeSpan mongoInsertS, mongoSelectS, mongoUpdateS, mongoDeleteS;
-            //mongoInsertS = mongoSelectS = mongoUpdateS = mongoDeleteS = TimeSpan.Zero;
-            //TimeSpan mongoInsertM, mongoSelectM, mongoUpdateM, mongoDeleteM;
-            //mongoInsertM = mongoSelectM = mongoUpdateM = mongoDeleteM = TimeSpan.Zero;
-
             Console.Write("\nThe Output Format Is In ");
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine("Seconds\n");
@@ -53,10 +48,8 @@ namespace DatabasePerformanceTest
             Console.WriteLine("----------------------------------------------------");
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine($"MS SQL      {msSqlInsertM.TF()}    {msSqlSelectM.TF()}    {msSqlUpdateM.TF()}    {msSqlDeleteM.TF()}");
-            //Console.WriteLine($MongoDB     {mongoInsertM.TF()}    {mongoSelectM.TF()}    {mongoUpdateM.TF()}    {mongoDeleteM.TF()}");
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"MS SQL      {msSqlInsertS.TF()}    {msSqlSelectS.TF()}    {msSqlUpdateS.TF()}    {msSqlDeleteS.TF()}");
-            //Console.WriteLine($"MongoDB     {mongoInsertS.TF()}    {mongoSelectS.TF()}    {mongoUpdateS.TF()}    {mongoDeleteS.TF()}");
 
             while (true)
                 Console.ReadKey(true);
