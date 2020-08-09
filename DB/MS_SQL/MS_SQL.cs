@@ -58,28 +58,14 @@ namespace DatabasePerformanceTest.DB.MS_SQL
             // Start to Insert Data to MS SQL Server
             if (SingleQuery)
             {
-                Person[] inserted = new Person[dataModels.Length];
                 stopwatch.Start();
 
-                for (int i = 0; i < dataModels.Length; i++)
-                {
-                    var p = new Person { Name = dataModels[i].Name };
-                    db.Person.Add(p);
-                    inserted[i] = p;
-                }
-
+                var persons = dataModels.Select(s => new Person { Name = s.Name }).ToArray();
+                db.Person.AddRange(persons);
                 db.SaveChanges();
 
-                for (int i = 0; i < inserted.Length; i++)
-                    Array.ForEach(dataModels[i].Values, value =>
-                    {
-                        db.PersonData.Add(new PersonData
-                        {
-                            PersonId = inserted[i].Id,
-                            Value = value
-                        });
-                    });
-
+                for (int i = 0; i < persons.Length; i++)
+                    db.PersonData.AddRange(dataModels[i].Values.Select(s => new PersonData { PersonId = persons[i].Id, Value = s }).ToArray());
                 db.SaveChanges();
             }
             else
@@ -111,6 +97,7 @@ namespace DatabasePerformanceTest.DB.MS_SQL
         {
             Console.WriteLine("Read...");
             var stopwatch = new Stopwatch();
+            if (SingleQuery) stopwatch.Start();
             // Get All Data from DB
             allPersons = db.Person.Include(i => i.PersonData).ToArray();
             if (!SingleQuery)
