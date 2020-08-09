@@ -12,8 +12,7 @@ namespace DatabasePerformanceTest
             {
                 PersonCount = 50,
                 EachPersonValueCount = 100,
-                MsSqlConnectionString = @"Data Source=.\SQL19;Initial Catalog=PerformanceTestDB;Integrated Security=True",
-                MongoDbConnectionString = "mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb"
+                MsSqlConnectionString = @"Data Source=.\SQL19;Initial Catalog=PerformanceTestDB;Integrated Security=True"
             };
         }
 
@@ -35,6 +34,5 @@ namespace DatabasePerformanceTest
         public int PersonCount { get; set; }
         public int EachPersonValueCount { get; set; }
         public string MsSqlConnectionString { get; set; }
-        public string MongoDbConnectionString { get; set; }
     }
 }
